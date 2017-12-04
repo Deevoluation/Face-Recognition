@@ -27,7 +27,7 @@ def face_extractor(img):
 
 def encrypt(key, filename):
     chunksize = 64 * 1024
-    outputFile =  './data/'+ filename
+    outputFile =  './encrypted/'+ filename
     filename = './faces/' + filename
     filesize = str(os.path.getsize(filename)).zfill(16)
     IV = Random.new().read(16)
@@ -61,8 +61,8 @@ if __name__ == '__main__':
     cap = cv2.VideoCapture(0)
     count = 0
     try:
-        if not os.path.exists('data'):
-            os.mkdir('data')
+        if not os.path.exists('encrypted'):
+            os.mkdir('encrypted')
         if not os.path.exists('faces'):
             os.mkdir('faces')
     except OSError:
@@ -89,16 +89,16 @@ if __name__ == '__main__':
         else:
             print("Face not found")
             pass
-        if (cv2.waitKey(13) == 13 or count == 30):
+        if (cv2.waitKey(13) == 13 or count == 300):
             break
            
     cap.release()
     cv2.destroyAllWindows()        
-    '''
+    
     try:
         shutil.rmtree('faces', ignore_errors=True)
     except OSError:
         print('Error: Deleting data')
-    '''
-    #os.mkdir('faces')
+    
+    os.mkdir('faces')
     print ("Samples collected")
